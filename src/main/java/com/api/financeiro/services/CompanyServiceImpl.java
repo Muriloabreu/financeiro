@@ -4,12 +4,14 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.api.financeiro.models.CompanyModel;
 import com.api.financeiro.repositories.CompanyRepository;
 
 import jakarta.transaction.Transactional;
 
+@Service
 public class CompanyServiceImpl implements CompanyService {
 
 	@Autowired
