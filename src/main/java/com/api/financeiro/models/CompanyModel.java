@@ -21,7 +21,7 @@ public class CompanyModel {
 	@Column(nullable = false)
 	private String Fantasy_name;
 	@Column(nullable = false)
-	private String cnpf;
+	private String cnpj;
 	
 	/* Constructor */
 	
@@ -29,12 +29,12 @@ public class CompanyModel {
 		super();
 	}
 
-	public CompanyModel(Long id, String corporate_name, String fantasy_name, String cnpf) {
+	public CompanyModel(Long id, String corporate_name, String fantasy_name, String cnpj) {
 		super();
 		this.id = id;
 		this.corporate_name = corporate_name;
 		Fantasy_name = fantasy_name;
-		this.cnpf = cnpf;
+		this.cnpj = cnpj;
 	}
 	
 	/* Accessor Methods */
@@ -63,23 +63,23 @@ public class CompanyModel {
 		Fantasy_name = fantasy_name;
 	}
 
-	public String getCnpf() {
-		return cnpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCnpf(String cnpf) {
-		this.cnpf = cnpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	@Override
 	public String toString() {
-		return "Company [id=" + id + ", corporate_name=" + corporate_name + ", Fantasy_name=" + Fantasy_name + ", cnpf="
-				+ cnpf + "]";
+		return "Company [id=" + id + ", corporate_name=" + corporate_name + ", Fantasy_name=" + Fantasy_name + ", cnpj="
+				+ cnpj + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Fantasy_name, cnpf, corporate_name, id);
+		return Objects.hash(Fantasy_name, cnpj, corporate_name, id);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class CompanyModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CompanyModel other = (CompanyModel) obj;
-		return Objects.equals(Fantasy_name, other.Fantasy_name) && Objects.equals(cnpf, other.cnpf)
+		return Objects.equals(Fantasy_name, other.Fantasy_name) && Objects.equals(cnpj, other.cnpj)
 				&& Objects.equals(corporate_name, other.corporate_name) && Objects.equals(id, other.id);
 	}
 	
