@@ -22,6 +22,8 @@ public class BranchModel {
 	private Long id;
 	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
+	private String cnpj;
 	@ManyToOne
 	@JoinColumn(name = "id_company")
 	private CompanyModel company;
@@ -29,14 +31,15 @@ public class BranchModel {
 	/* Constructor */
 	
 	public BranchModel() {
-		super();
+		
 	}
 
 
-	public BranchModel(Long id, String name, CompanyModel company) {
+	public BranchModel(Long id, String name, String cnpj, CompanyModel company) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.cnpj = cnpj;
 		this.company = company;
 	}
 
@@ -70,17 +73,25 @@ public class BranchModel {
 	public void setCompany(CompanyModel company) {
 		this.company = company;
 	}
+	
+	public String getCnpj() {
+		return cnpj;
+	}
+	
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
 
 
 	@Override
 	public String toString() {
-		return "BranchModel [id=" + id + ", name=" + name + ", company=" + company + "]";
+		return "BranchModel [id=" + id + ", name=" + name + ", cnpj=" + cnpj + ", company=" + company + "]";
 	}
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(company, id, name);
+		return Objects.hash(cnpj, company, id, name);
 	}
 
 
@@ -93,9 +104,12 @@ public class BranchModel {
 		if (getClass() != obj.getClass())
 			return false;
 		BranchModel other = (BranchModel) obj;
-		return Objects.equals(company, other.company) && Objects.equals(id, other.id)
-				&& Objects.equals(name, other.name);
+		return Objects.equals(cnpj, other.cnpj) && Objects.equals(company, other.company)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
+
+
+	
 		
 	
 	
