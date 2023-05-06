@@ -37,7 +37,7 @@ public class CompanyController {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name company is already in use!"); 
 		}
-		if(companyService.existsByCnpj(companyDtos.getCnpf())) {
+		if(companyService.existsByCnpj(companyDtos.getCnpj())) {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CNPJ is already in use!"); 
 		}
@@ -95,7 +95,7 @@ public class CompanyController {
 		var companyModel = companyOptional.get();
 		companyModel.setCorporate_name(companyDtos.getCorporate_name());
 		companyModel.setFantasy_name(companyDtos.getFantasy_name());
-		companyModel.setCnpf(companyDtos.getCnpf());
+		companyModel.setCnpj(companyDtos.getCnpj());
 		
 				
 		return ResponseEntity.status(HttpStatus.OK).body(companyService.save(companyModel));
