@@ -45,13 +45,13 @@ public class BranchServiceImpl implements BranchService{
 	}
 
 	@Override
-	public boolean findByName(String name) {
+	public boolean existsByName(String name) {
 		
 		return branchRepository.existsByName(name);
 	}
 
 	@Override
-	public boolean findByCnpj(String cnpj) {
+	public boolean existsByCnpj(String cnpj) {
 		
 		return branchRepository.existsByCnpj(cnpj);
 	}

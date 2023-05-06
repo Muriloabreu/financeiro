@@ -11,7 +11,7 @@ public interface BranchService {
 	Optional<BranchModel> findById(Long id);
 	BranchModel save(BranchModel branch);
 	void delete (BranchModel brance);
-	boolean findByName(String name);
-	boolean findByCnpj(String cnpj);
+	boolean existsByName(String name);
+	boolean existsByCnpj(String cnpj);
 
 }
