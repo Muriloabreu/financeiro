@@ -9,7 +9,7 @@ public class CompanyDtos {
 	@NotBlank
 	private String Fantasy_name;
 	@NotBlank
-	private String cnpf;
+	private String cnpj;
 	
 	/* Constructor */
 	
@@ -17,11 +17,11 @@ public class CompanyDtos {
 		super();
 	}
 
-	public CompanyDtos(@NotBlank String corporate_name, @NotBlank String fantasy_name, @NotBlank String cnpf) {
+	public CompanyDtos(@NotBlank String corporate_name, @NotBlank String fantasy_name, @NotBlank String cnpj) {
 		super();
 		this.corporate_name = corporate_name;
 		Fantasy_name = fantasy_name;
-		this.cnpf = cnpf;
+		this.cnpj = cnpj;
 	}
 	
 	/* Accessor Methods */
@@ -42,12 +42,12 @@ public class CompanyDtos {
 		Fantasy_name = fantasy_name;
 	}
 
-	public String getCnpf() {
-		return cnpf;
+	public String getCnpj() {
+		return cnpj;
 	}
 
-	public void setCnpf(String cnpf) {
-		this.cnpf = cnpf;
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
 	}
 
 	
