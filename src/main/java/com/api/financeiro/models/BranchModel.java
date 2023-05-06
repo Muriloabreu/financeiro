@@ -1,0 +1,105 @@
+package com.api.financeiro.models;
+
+
+
+import java.util.Objects;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TB_BRANCH")
+public class BranchModel {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(nullable = false)
+	private String name;
+	@ManyToOne
+	@JoinColumn(name = "id_company")
+	private CompanyModel company;
+	
+	/* Constructor */
+	
+	public BranchModel() {
+		super();
+	}
+
+
+	public BranchModel(Long id, String name, CompanyModel company) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.company = company;
+	}
+
+	/* Accessor Methods */
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public CompanyModel getCompany() {
+		return company;
+	}
+
+
+	public void setCompany(CompanyModel company) {
+		this.company = company;
+	}
+
+
+	@Override
+	public String toString() {
+		return "BranchModel [id=" + id + ", name=" + name + ", company=" + company + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(company, id, name);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BranchModel other = (BranchModel) obj;
+		return Objects.equals(company, other.company) && Objects.equals(id, other.id)
+				&& Objects.equals(name, other.name);
+	}
+		
+	
+	
+	
+	
+
+}
