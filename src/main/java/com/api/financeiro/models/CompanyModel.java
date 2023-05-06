@@ -23,7 +23,8 @@ public class CompanyModel {
 	@Column(nullable = false)
 	private String cnpf;
 	
-	/* Construtor */
+	/* Constructor */
+	
 	public CompanyModel() {
 		super();
 	}
@@ -36,7 +37,7 @@ public class CompanyModel {
 		this.cnpf = cnpf;
 	}
 	
-	/* Métodos Acessores */
+	/* Accessor Methods */
 
 	public Long getId() {
 		return id;
