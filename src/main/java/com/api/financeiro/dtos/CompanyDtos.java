@@ -7,20 +7,20 @@ public class CompanyDtos {
 	@NotBlank
 	private String corporate_name;
 	@NotBlank
-	private String Fantasy_name;
+	private String fantasy_name;
 	@NotBlank
 	private String cnpj;
 	
 	/* Constructor */
 	
 	public CompanyDtos() {
-		super();
+		
 	}
 
 	public CompanyDtos(@NotBlank String corporate_name, @NotBlank String fantasy_name, @NotBlank String cnpj) {
-		super();
+		
 		this.corporate_name = corporate_name;
-		Fantasy_name = fantasy_name;
+		this.fantasy_name = fantasy_name;
 		this.cnpj = cnpj;
 	}
 	
@@ -34,12 +34,12 @@ public class CompanyDtos {
 		this.corporate_name = corporate_name;
 	}
 
-	public String getFantasy_name() {
-		return Fantasy_name;
+	public String getfantasy_name() {
+		return fantasy_name;
 	}
 
-	public void setFantasy_name(String fantasy_name) {
-		Fantasy_name = fantasy_name;
+	public void setfantasy_name(String fantasy_name) {
+		this.fantasy_name = fantasy_name;
 	}
 
 	public String getCnpj() {
