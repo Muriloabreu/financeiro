@@ -23,7 +23,7 @@ import com.api.financeiro.services.CompanyService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/financeiro/company")
+@RequestMapping("financeiro/company")
 public class CompanyController {
 	
 	@Autowired
@@ -33,10 +33,7 @@ public class CompanyController {
 	@PostMapping
 	public ResponseEntity<Object> saveCompany(@RequestBody @Valid CompanyDtos companyDtos){
 		
-		if(companyService.existsByName(companyDtos.getCorporate_name())) {
-			
-			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name company is already in use!"); 
-		}
+		
 		if(companyService.existsByCnpj(companyDtos.getCnpj())) {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CNPJ is already in use!"); 
@@ -89,12 +86,12 @@ public class CompanyController {
 		Optional<CompanyModel> companyOptional = companyService.findById(id);
 		if (!companyOptional.isPresent()) {
 			
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found. ");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Company not found.");
 		}
 		
 		var companyModel = companyOptional.get();
 		companyModel.setCorporate_name(companyDtos.getCorporate_name());
-		companyModel.setFantasy_name(companyDtos.getFantasy_name());
+		companyModel.setfantasy_name(companyDtos.getfantasy_name());
 		companyModel.setCnpj(companyDtos.getCnpj());
 		
 				

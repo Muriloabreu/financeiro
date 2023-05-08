@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.financeiro.models.EmphoyeeModel;
+import com.api.financeiro.repositories.EmphoyeeRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -14,39 +15,39 @@ import jakarta.transaction.Transactional;
 public class EmphoyeeServiceImpl implements EmphoyeeService{
 	
 	@Autowired
-	EmphoyeeService emphoyeeService;
+	EmphoyeeRepository emphoyeeRepository;
 
 	@Override
 	public List<EmphoyeeModel> findAll() {
 		
-		return emphoyeeService.findAll();
+		return emphoyeeRepository.findAll();
 	}
 
 	@Override
 	public Optional<EmphoyeeModel> findById(Long id) {
 		
-		return emphoyeeService.findById(id);
+		return emphoyeeRepository.findById(id);
 	}
 
 	@Override
 	@Transactional
 	public EmphoyeeModel save(EmphoyeeModel emphoyee) {
 		
-		return emphoyeeService.save(emphoyee);
+		return emphoyeeRepository.save(emphoyee);
 	}
 
 	@Override
 	@Transactional
 	public void delete(EmphoyeeModel emphoyee) {
 		
-		emphoyeeService.delete(emphoyee);
+		emphoyeeRepository.delete(emphoyee);
 		
 	}
 
 	@Override
 	public boolean existsByCpf(String cpf) {
 		
-		return emphoyeeService.existsByCpf(cpf);
+		return emphoyeeRepository.existsByCpf(cpf);
 	}
 
 }
