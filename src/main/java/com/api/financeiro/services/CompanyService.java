@@ -11,6 +11,6 @@ public interface CompanyService {
 	Optional<CompanyModel> findById(Long id);
 	CompanyModel save(CompanyModel company);
 	void delete (CompanyModel company);
-	boolean existsByName(String name);
 	boolean existsByCnpj(String cnpj);
+	
 }

@@ -46,15 +46,12 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public boolean existsByName(String name) {
-		
-		return companyRepository.existsByName(name);
-	}
-
-	@Override
 	public boolean existsByCnpj(String cnpj) {
 		
 		return companyRepository.existsByCnpj(cnpj);
 	}
 
+	
+
+	
 }
