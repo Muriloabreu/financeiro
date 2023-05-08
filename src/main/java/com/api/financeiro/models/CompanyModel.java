@@ -19,25 +19,28 @@ public class CompanyModel {
 	@Column(nullable = false)
 	private String corporate_name;
 	@Column(nullable = false)
-	private String Fantasy_name;
+	private String fantasy_name;
 	@Column(nullable = false)
 	private String cnpj;
 	
 	/* Constructor */
 	
 	public CompanyModel() {
-		super();
+		
 	}
-
+	
 	public CompanyModel(Long id, String corporate_name, String fantasy_name, String cnpj) {
 		super();
 		this.id = id;
 		this.corporate_name = corporate_name;
-		Fantasy_name = fantasy_name;
+		this.fantasy_name = fantasy_name;
 		this.cnpj = cnpj;
 	}
-	
+
+
+
 	/* Accessor Methods */
+
 
 	public Long getId() {
 		return id;
@@ -55,12 +58,12 @@ public class CompanyModel {
 		this.corporate_name = corporate_name;
 	}
 
-	public String getFantasy_name() {
-		return Fantasy_name;
+	public String getfantasy_name() {
+		return fantasy_name;
 	}
 
-	public void setFantasy_name(String fantasy_name) {
-		Fantasy_name = fantasy_name;
+	public void setfantasy_name(String fantasy_name) {
+		this.fantasy_name = fantasy_name;
 	}
 
 	public String getCnpj() {
@@ -70,16 +73,16 @@ public class CompanyModel {
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Company [id=" + id + ", corporate_name=" + corporate_name + ", Fantasy_name=" + Fantasy_name + ", cnpj="
+		return "Company [id=" + id + ", corporate_name=" + corporate_name + ", fantasy_name=" + fantasy_name + ", cnpj="
 				+ cnpj + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Fantasy_name, cnpj, corporate_name, id);
+		return Objects.hash(fantasy_name, cnpj, corporate_name, id);
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class CompanyModel {
 		if (getClass() != obj.getClass())
 			return false;
 		CompanyModel other = (CompanyModel) obj;
-		return Objects.equals(Fantasy_name, other.Fantasy_name) && Objects.equals(cnpj, other.cnpj)
+		return Objects.equals(fantasy_name, other.fantasy_name) && Objects.equals(cnpj, other.cnpj)
 				&& Objects.equals(corporate_name, other.corporate_name) && Objects.equals(id, other.id);
 	}
 	
