@@ -23,7 +23,7 @@ import com.api.financeiro.services.ExpenseTypeService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("financeiro-expense-type")
+@RequestMapping("financeiro/expense-type")
 public class ExpenseTypeController {
 	
 	

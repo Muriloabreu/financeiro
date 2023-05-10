@@ -23,7 +23,7 @@ import com.api.financeiro.services.BranchService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("financeiro-branch")
+@RequestMapping("financeiro/branch")
 public class BranchController {
 
 	@Autowired
@@ -37,7 +37,7 @@ public class BranchController {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: Name branch is already in use!"); 
 		}
-		if(branchService.existsByCnpj(branchDtos.getCnpf())) {
+		if(branchService.existsByCnpj(branchDtos.getCnpj())) {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CNPJ is already in use!"); 
 		}
@@ -94,7 +94,7 @@ public class BranchController {
 		
 		var branchModel = branchOptional.get();
 		branchModel.setName(branchDtos.getName());
-		branchModel.setCnpj(branchDtos.getCnpf());
+		branchModel.setCnpj(branchDtos.getCnpj());
 		branchModel.setCompany(branchDtos.getCompany());
 		
 				

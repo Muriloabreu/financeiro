@@ -43,10 +43,6 @@ public class BoxOpeningServiceImpl implements BoxOpeningService{
 		boxOpeningRepository.delete(box);
 	}
 
-	@Override
-	public boolean existsByBoxOpen(boolean open) {
-		
-		return boxOpeningRepository.existsByBoxOpen(open);
-	}
+	
 
 }

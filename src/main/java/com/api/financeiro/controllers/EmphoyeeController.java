@@ -24,7 +24,7 @@ import com.api.financeiro.services.EmphoyeeService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("financeiro-emphoyee")
+@RequestMapping("financeiro/emphoyee")
 public class EmphoyeeController {
 	
 	@Autowired

@@ -1,6 +1,7 @@
 package com.api.financeiro.models;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -8,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,34 +20,37 @@ public class BoxOpeningModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, unique = true)
-	private LocalDate date_first;
-	@Column(nullable = false, unique = true)
-	private LocalDate date_last;
+	@Column(nullable = false)
+	private LocalDateTime date_first;
+	@Column(nullable = true)
+	private LocalDateTime date_last;
 	@Column(nullable = false)
 	private Double valueOpening;
 	@Column(nullable = false)
 	private Double value;
-	@Column(nullable = false)
-	private boolean boxOpening;
+	@ManyToOne
+	@JoinColumn(nullable = false)
+	private EmphoyeeModel emphoyee;
+	
+	/* Constructor */
 	
 	public BoxOpeningModel() {
 		
 	}
 
-	public BoxOpeningModel(Long id, LocalDate date_first, LocalDate date_last, Double valueOpening, Double value,
-			boolean boxOpening) {
+	public BoxOpeningModel(Long id, LocalDateTime date_first, LocalDateTime date_last, Double valueOpening,
+			Double value, EmphoyeeModel emphoyee) {
 		super();
 		this.id = id;
 		this.date_first = date_first;
 		this.date_last = date_last;
 		this.valueOpening = valueOpening;
 		this.value = value;
-		this.boxOpening = boxOpening;
+		this.emphoyee = emphoyee;
 	}
-	
-	
 
+	/* Accessor Methods */
+	
 	public Long getId() {
 		return id;
 	}
@@ -53,19 +59,19 @@ public class BoxOpeningModel {
 		this.id = id;
 	}
 
-	public LocalDate getDate_first() {
+	public LocalDateTime getDate_first() {
 		return date_first;
 	}
 
-	public void setDate_first(LocalDate date_first) {
+	public void setDate_first(LocalDateTime date_first) {
 		this.date_first = date_first;
 	}
 
-	public LocalDate getDate_last() {
+	public LocalDateTime getDate_last() {
 		return date_last;
 	}
 
-	public void setDate_last(LocalDate date_last) {
+	public void setDate_last(LocalDateTime date_last) {
 		this.date_last = date_last;
 	}
 
@@ -85,23 +91,23 @@ public class BoxOpeningModel {
 		this.value = value;
 	}
 
-	public boolean isBoxOpening() {
-		return boxOpening;
+	public EmphoyeeModel getEmphoyee() {
+		return emphoyee;
 	}
-
-	public void setBoxOpening(boolean boxOpening) {
-		this.boxOpening = boxOpening;
+	
+	public void setEmphoyee(EmphoyeeModel emphoyee) {
+		this.emphoyee = emphoyee;
 	}
 
 	@Override
 	public String toString() {
 		return "BoxOpeningModel [id=" + id + ", date_first=" + date_first + ", date_last=" + date_last
-				+ ", valueOpening=" + valueOpening + ", value=" + value + ", boxOpening=" + boxOpening + "]";
+				+ ", valueOpening=" + valueOpening + ", value=" + value + ", emphoyee=" + emphoyee + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(boxOpening, date_first, date_last, id, value, valueOpening);
+		return Objects.hash(date_first, date_last, id, value, valueOpening);
 	}
 
 	@Override
@@ -113,10 +119,16 @@ public class BoxOpeningModel {
 		if (getClass() != obj.getClass())
 			return false;
 		BoxOpeningModel other = (BoxOpeningModel) obj;
-		return boxOpening == other.boxOpening && Objects.equals(date_first, other.date_first)
-				&& Objects.equals(date_last, other.date_last) && Objects.equals(id, other.id)
-				&& Objects.equals(value, other.value) && Objects.equals(valueOpening, other.valueOpening);
+		return Objects.equals(date_first, other.date_first) && Objects.equals(date_last, other.date_last)
+				&& Objects.equals(id, other.id) && Objects.equals(value, other.value)
+				&& Objects.equals(valueOpening, other.valueOpening);
 	}
+
+	
+	
+	
+
+	
 	
 	
 	

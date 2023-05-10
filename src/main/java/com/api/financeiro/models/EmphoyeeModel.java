@@ -1,6 +1,5 @@
 package com.api.financeiro.models;
 
-import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,8 +24,11 @@ public class EmphoyeeModel {
 	@Column(nullable = false, unique = true, length = 15)
 	private String cpf;
 	@ManyToOne
-	@JoinColumn(name = "id_branch")
+	@JoinColumn(nullable = false)
 	private BranchModel branch;
+	@Column(nullable = false)
+	private String department;
+	
 	
 	
 	/* Constructor */
@@ -35,14 +37,16 @@ public class EmphoyeeModel {
 	public EmphoyeeModel() {
 		
 	}
-	
-	public EmphoyeeModel(Long id, String first_name, String last_name,String cpf, BranchModel branch) {
+
+	public EmphoyeeModel(Long id, String first_name, String last_name, String cpf, BranchModel branch,
+			String department) {
 		super();
 		this.id = id;
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.cpf = cpf;
 		this.branch = branch;
+		this.department = department;
 	}
 
 
@@ -82,31 +86,22 @@ public class EmphoyeeModel {
 		this.cpf = cpf;
 	}
 
+	public String getDepartment() {
+		return department;
+	}
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	@Override
 	public String toString() {
 		return "EmphoyeeModel [id=" + id + ", first_name=" + first_name + ", last_name=" + last_name + ", cpf=" + cpf
-				+ ", branch=" + branch + "]";
+				+ ", branch=" + branch + ", department=" + department + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(branch, cpf, first_name, id, last_name);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmphoyeeModel other = (EmphoyeeModel) obj;
-		return Objects.equals(branch, other.branch) && Objects.equals(cpf, other.cpf)
-				&& Objects.equals(first_name, other.first_name) && Objects.equals(id, other.id)
-				&& Objects.equals(last_name, other.last_name);
-	}
-
+	
+	
+	
 	
 	
 	

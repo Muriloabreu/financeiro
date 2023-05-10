@@ -27,9 +27,9 @@ public class CompanyTest {
 	public void saveCompany() {
 
 		var company01 = new CompanyModel();
-		company01.setCorporate_name("Company 03 SA");
-		company01.setfantasy_name("Farmacia 01");
-		company01.setCnpj("001.001.00001-03");
+		company01.setCorporate_name("Company 02 EIRELI");
+		company01.setfantasy_name("Padaria PÂO MASSA");
+		company01.setCnpj("001.001.00001-01");
 
 		companyService.save(company01);
 

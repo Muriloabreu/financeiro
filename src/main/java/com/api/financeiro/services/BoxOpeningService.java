@@ -11,6 +11,6 @@ public interface BoxOpeningService {
 	Optional<BoxOpeningModel> findById(Long id);
 	BoxOpeningModel save(BoxOpeningModel box);
 	void delete(BoxOpeningModel box);
-	boolean existsByBoxOpen(boolean open);
+	
 
 }

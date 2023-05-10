@@ -11,7 +11,7 @@ public class BranchDtos {
 	@NotBlank
 	private String name;
 	@NotBlank
-	private String cnpf;
+	private String cnpj;
 	@NotNull
 	private CompanyModel company;
 	
@@ -20,10 +20,10 @@ public class BranchDtos {
 	public BranchDtos() {
 		super();
 	}
-	public BranchDtos(@NotBlank String name, @NotBlank String cnpf, @NotNull CompanyModel company) {
+	public BranchDtos(@NotBlank String name, @NotBlank String cnpj, @NotNull CompanyModel company) {
 		super();
 		this.name = name;
-		this.cnpf = cnpf;
+		this.cnpj = cnpj;
 		this.company = company;
 	}
 	
@@ -35,11 +35,11 @@ public class BranchDtos {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCnpf() {
-		return cnpf;
+	public String getCnpj() {
+		return cnpj;
 	}
-	public void setCnpf(String cnpf) {
-		this.cnpf = cnpf;
+	public void setCnpf(String cnpj) {
+		this.cnpj = cnpj;
 	}
 	public CompanyModel getCompany() {
 		return company;
