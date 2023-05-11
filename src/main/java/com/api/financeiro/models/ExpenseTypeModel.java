@@ -1,6 +1,5 @@
 package com.api.financeiro.models;
 
-import java.util.Objects;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,20 +18,26 @@ public class ExpenseTypeModel {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
-	private Double value;
+	private double value;
+	
+	
+	
 	
 	/* Constructor */
 	
 	public ExpenseTypeModel() {
-		super();
+		
 	}
-	public ExpenseTypeModel(Long id, String name, Double value) {
+		
+	public ExpenseTypeModel(Long id, String name, double value) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.value = value;
-	}
 		
+	}
+
+
 	/* Accessor Methods */
 		
 	public Long getId() {
@@ -47,32 +52,17 @@ public class ExpenseTypeModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Double getValue() {
+	public double getValue() {
 		return value;
 	}
-	public void setValue(Double value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 	
-	@Override
-	public String toString() {
-		return "ExpenseTypeModel [id=" + id + ", name=" + name + ", value=" + value + "]";
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, name, value);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ExpenseTypeModel other = (ExpenseTypeModel) obj;
-		return Objects.equals(id, other.id) && Objects.equals(name, other.name) && Objects.equals(value, other.value);
-	}
+	
+	
+	
+	
 	
 	
 	

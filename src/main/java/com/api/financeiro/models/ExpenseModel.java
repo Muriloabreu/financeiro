@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -28,40 +31,41 @@ public class ExpenseModel {
 	@ManyToOne
 	@JoinColumn(nullable = false)
 	private EmphoyeeModel emphoyee;
-	@Column(nullable = false)
-	private Double value;
 	@OneToOne
 	@JoinColumn(name = "id_box_opening", referencedColumnName = "id")
 	private BoxOpeningModel boxOpening;
 	@OneToMany
 	@JoinColumn(name = "id_expense")
-	private List<ExpenseModel> expenses = new ArrayList<>();
-	@Column(nullable = true)
-	private double valueTotExpense;
-	@Column(nullable = true)
+	private List<ExpenseTypeModel> expensesTypes = new ArrayList<>();
+	@Column(nullable = false)
+	private double valueTotExpenseType;
+	@Column(nullable = false)
 	private double valueDelivered;
-	@Column(nullable = true)
+	@Column(nullable = false)
 	private double valueReturn;
+	@Column(nullable = false)
+	private boolean statusValueReturn;
 	
 	
 	/* Constructor */
 	
 	public ExpenseModel() {
-		super();
+		
 	}
 
-	public ExpenseModel(Long id, BranchModel branche, EmphoyeeModel emphoyee, Double value, BoxOpeningModel boxOpening,
-			List<ExpenseModel> expenses, double valueTotExpense, double valueDelivered, double valueReturn) {
+	public ExpenseModel(Long id, BranchModel branche, EmphoyeeModel emphoyee, BoxOpeningModel boxOpening,
+			List<ExpenseTypeModel> expensesTypes, double valueTotExpenseType, double valueDelivered, double valueReturn,
+			boolean statusValueReturn) {
 		super();
 		this.id = id;
 		this.branche = branche;
 		this.emphoyee = emphoyee;
-		this.value = value;
 		this.boxOpening = boxOpening;
-		this.expenses = expenses;
-		this.valueTotExpense = valueTotExpense;
+		this.expensesTypes = expensesTypes;
+		this.valueTotExpenseType = valueTotExpenseType;
 		this.valueDelivered = valueDelivered;
 		this.valueReturn = valueReturn;
+		this.statusValueReturn = statusValueReturn;
 	}
 
 
@@ -97,50 +101,52 @@ public class ExpenseModel {
 	public void setEmphoyee(EmphoyeeModel emphoyee) {
 		this.emphoyee = emphoyee;
 	}
-
-
-	public Double getValue() {
-		return value;
+	public List<ExpenseTypeModel> getExpensesTypes() {
+		return expensesTypes;
 	}
 
-
-	public void setValue(Double value) {
-		this.value = value;
+	public void setExpensesTypes(List<ExpenseTypeModel> expensesTypes) {
+		this.expensesTypes = expensesTypes;
 	}
 
+	public double getValueTotExpenseType() {
+		
+		double TotExpenseTypes = 0.0;
 
-	public List<ExpenseModel> getExpenses() {
-		return expenses;
+		for (ExpenseTypeModel expenseType : expensesTypes) {
+
+			TotExpenseTypes += expenseType.getValue();
+		}
+		
+		return TotExpenseTypes;
 	}
 
-
-	public void setExpenses(List<ExpenseModel> expenses) {
-		this.expenses = expenses;
+	public void setValueTotExpenseType(double valueTotExpenseType) {
+		this.valueTotExpenseType = valueTotExpenseType;
 	}
-
-
-	public double getValueTotExpense() {
-		return valueTotExpense;
-	}
-
-
-	public void setValueTotExpense(double valueTotExpense) {
-		this.valueTotExpense = valueTotExpense;
-	}
-
 
 	public double getValueDelivered() {
 		return valueDelivered;
 	}
 
-
 	public void setValueDelivered(double valueDelivered) {
 		this.valueDelivered = valueDelivered;
 	}
 
-
 	public double getValueReturn() {
-		return valueReturn;
+		
+		double totValueReturn = 0.0;
+		
+		if(getValueDelivered() > 0 ) {
+			
+			if(getValueTotExpenseType() < getValueDelivered()) {
+				
+				totValueReturn = getValueDelivered() - getValueTotExpenseType();
+			}			
+		}
+				
+		
+		return totValueReturn;
 	}
 
 
@@ -155,20 +161,27 @@ public class ExpenseModel {
 		this.boxOpening = boxOpening;
 	}
 
+	public boolean isStatusValueReturn() {
+		return statusValueReturn;
+	}
+
+	public void setStatusValueReturn(boolean statusValueReturn) {
+		this.statusValueReturn = statusValueReturn;
+	}
 
 	@Override
 	public String toString() {
-		return "ExpenseModel [id=" + id + ", branche=" + branche + ", emphoyee=" + emphoyee + ", value=" + value
-				+ ", expenses=" + expenses + ", valueTotExpense=" + valueTotExpense + ", valueDelivered="
-				+ valueDelivered + ", valueReturn=" + valueReturn + "]";
+		return "ExpenseModel [id=" + id + ", branche=" + branche + ", emphoyee=" + emphoyee + ", boxOpening="
+				+ boxOpening + ", expensesTypes=" + expensesTypes + ", valueTotExpenseType=" + valueTotExpenseType
+				+ ", valueDelivered=" + valueDelivered + ", valueReturn=" + valueReturn + ", statusValueReturn="
+				+ statusValueReturn + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(expenses, id, value, valueDelivered, valueReturn, valueTotExpense);
+		return Objects.hash(boxOpening, branche, emphoyee, expensesTypes, id, statusValueReturn, valueDelivered,
+				valueReturn, valueTotExpenseType);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -179,12 +192,24 @@ public class ExpenseModel {
 		if (getClass() != obj.getClass())
 			return false;
 		ExpenseModel other = (ExpenseModel) obj;
-		return Objects.equals(expenses, other.expenses) && Objects.equals(id, other.id)
-				&& Objects.equals(value, other.value)
+		return Objects.equals(boxOpening, other.boxOpening) && Objects.equals(branche, other.branche)
+				&& Objects.equals(emphoyee, other.emphoyee) && Objects.equals(expensesTypes, other.expensesTypes)
+				&& Objects.equals(id, other.id) && statusValueReturn == other.statusValueReturn
 				&& Double.doubleToLongBits(valueDelivered) == Double.doubleToLongBits(other.valueDelivered)
 				&& Double.doubleToLongBits(valueReturn) == Double.doubleToLongBits(other.valueReturn)
-				&& Double.doubleToLongBits(valueTotExpense) == Double.doubleToLongBits(other.valueTotExpense);
+				&& Double.doubleToLongBits(valueTotExpenseType) == Double.doubleToLongBits(other.valueTotExpenseType);
 	}
+
+	
+	
+
+	
+
+	
+	
+
+
+	
 	
 	
 	

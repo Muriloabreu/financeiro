@@ -45,8 +45,21 @@ public class ExpenseController {
 		var expenseModel = new ExpenseModel();
 		BeanUtils.copyProperties(expenseDtos, expenseModel);
 		
+		expenseModel.setValueTotExpenseType(expenseModel.getValueTotExpenseType());
+		expenseModel.setValueReturn(expenseModel.getValueReturn());
 		
-		return ResponseEntity.status(HttpStatus.OK).body(expenseService.save(expenseModel));		
+		System.out.println("Total de lançamentos: " + expenseModel.getValueTotExpenseType());
+		System.out.println("Troco: " + expenseModel.getValueReturn());
+		
+		if (expenseModel.getBoxOpening().getValueOpening() > 0) {
+			
+			expenseModel.getBoxOpening().setValue(expenseModel.getValueTotExpenseType() - expenseModel.getBoxOpening().getValueOpening());;
+			
+			return ResponseEntity.status(HttpStatus.OK).body(expenseService.save(expenseModel));
+			
+		}
+		
+		return ResponseEntity.status(HttpStatus.CONFLICT).body("Not Saldo !!");		
 		
 	}
 	

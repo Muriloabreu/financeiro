@@ -16,22 +16,22 @@ public class ExpenseDtos {
 	@NotNull
 	private EmphoyeeModel emphoyee;
 	@NotNull
-	private List<ExpenseModel> expenses;
+	private List<ExpenseTypeDtos> expensesTypes;
 	@NotNull
 	private BoxOpeningModel boxOpening;
 	
 	private double valueDelivered;
 
 	public ExpenseDtos() {
-		super();
+		
 	}
 
 	public ExpenseDtos(@NotNull BranchModel branche, @NotNull EmphoyeeModel emphoyee,
-			@NotNull List<ExpenseModel> expenses,BoxOpeningModel boxOpening, double valueDelivered) {
+			@NotNull List<ExpenseTypeDtos> expensesTypes,BoxOpeningModel boxOpening, double valueDelivered) {
 		super();
 		this.branche = branche;
 		this.emphoyee = emphoyee;
-		this.expenses = expenses;
+		this.expensesTypes = expensesTypes;
 		this.boxOpening = boxOpening;
 		this.valueDelivered = valueDelivered;
 	}
@@ -52,12 +52,11 @@ public class ExpenseDtos {
 		this.emphoyee = emphoyee;
 	}
 
-	public List<ExpenseModel> getExpenses() {
-		return expenses;
+	public List<ExpenseTypeDtos> getExpensesTypes() {
+		return expensesTypes;
 	}
-
-	public void setExpenses(List<ExpenseModel> expenses) {
-		this.expenses = expenses;
+	public void setExpensesTypes(List<ExpenseTypeDtos> expensesTypes) {
+		this.expensesTypes = expensesTypes;
 	}
 
 	public double getValueDelivered() {
