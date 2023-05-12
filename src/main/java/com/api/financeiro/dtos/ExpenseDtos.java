@@ -6,6 +6,7 @@ import com.api.financeiro.models.BoxOpeningModel;
 import com.api.financeiro.models.BranchModel;
 import com.api.financeiro.models.EmphoyeeModel;
 import com.api.financeiro.models.ExpenseModel;
+import com.api.financeiro.models.ExpenseTypeModel;
 
 import jakarta.validation.constraints.NotNull;
 
@@ -16,18 +17,19 @@ public class ExpenseDtos {
 	@NotNull
 	private EmphoyeeModel emphoyee;
 	@NotNull
-	private List<ExpenseTypeDtos> expensesTypes;
+	private List<ExpenseTypeModel> expensesTypes;
 	@NotNull
 	private BoxOpeningModel boxOpening;
-	
+	@NotNull
 	private double valueDelivered;
 
 	public ExpenseDtos() {
 		
 	}
-
+	
 	public ExpenseDtos(@NotNull BranchModel branche, @NotNull EmphoyeeModel emphoyee,
-			@NotNull List<ExpenseTypeDtos> expensesTypes,BoxOpeningModel boxOpening, double valueDelivered) {
+			@NotNull List<ExpenseTypeModel> expensesTypes, @NotNull BoxOpeningModel boxOpening,
+			@NotNull double valueDelivered) {
 		super();
 		this.branche = branche;
 		this.emphoyee = emphoyee;
@@ -35,6 +37,8 @@ public class ExpenseDtos {
 		this.boxOpening = boxOpening;
 		this.valueDelivered = valueDelivered;
 	}
+
+
 
 	public BranchModel getBranche() {
 		return branche;
@@ -52,10 +56,10 @@ public class ExpenseDtos {
 		this.emphoyee = emphoyee;
 	}
 
-	public List<ExpenseTypeDtos> getExpensesTypes() {
+	public List<ExpenseTypeModel> getExpensesTypes() {
 		return expensesTypes;
 	}
-	public void setExpensesTypes(List<ExpenseTypeDtos> expensesTypes) {
+	public void setExpensesTypes(List<ExpenseTypeModel> expensesTypes) {
 		this.expensesTypes = expensesTypes;
 	}
 
