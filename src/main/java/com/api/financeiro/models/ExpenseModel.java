@@ -39,7 +39,7 @@ public class ExpenseModel {
 	private List<ExpenseTypeModel> expensesTypes = new ArrayList<>();
 	@Column(nullable = false)
 	private double valueTotExpenseType;
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private double valueDelivered;
 	@Column(nullable = false)
 	private double valueReturn;
