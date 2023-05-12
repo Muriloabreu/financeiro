@@ -1,6 +1,7 @@
 package com.api.financeiro.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.financeiro.dtos.ExpenseDtos;
+import com.api.financeiro.models.BoxOpeningModel;
 import com.api.financeiro.models.ExpenseModel;
 import com.api.financeiro.services.ExpenseService;
 
@@ -27,7 +29,7 @@ public class ExpenseController {
 	
 	
 	@PostMapping
-	public ResponseEntity<Object> saveBranch(@RequestBody @Valid ExpenseDtos expenseDtos){
+	public ResponseEntity<Object> saveExpense(@RequestBody @Valid ExpenseDtos expenseDtos){
 		
 			if(expenseDtos.getBranche() == null) {
 			
@@ -39,8 +41,7 @@ public class ExpenseController {
 				
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: There is no Emphoyee in use!"); 
 				
-				}
-		
+				}		
 				
 		var expenseModel = new ExpenseModel();
 		BeanUtils.copyProperties(expenseDtos, expenseModel);
@@ -48,18 +49,35 @@ public class ExpenseController {
 		expenseModel.setValueTotExpenseType(expenseModel.getValueTotExpenseType());
 		expenseModel.setValueReturn(expenseModel.getValueReturn());
 		
-		System.out.println("Total de lançamentos: " + expenseModel.getValueTotExpenseType());
-		System.out.println("Troco: " + expenseModel.getValueReturn());
+		Optional<BoxOpeningModel> boxOptinal = expenseService.findByIdBox(expenseModel.getBoxOpening().getId());
+		var boxModel = boxOptinal.get();
 		
-		if (expenseModel.getBoxOpening().getValueOpening() > 0) {
+		/* Quando for o primeiro Expense o campo "Value" da tabela BoxOpening inicia 0 */
+		if(boxModel.getValue() == null || boxModel.getValue() == 0){
 			
-			expenseModel.getBoxOpening().setValue(expenseModel.getValueTotExpenseType() - expenseModel.getBoxOpening().getValueOpening());;
+			boxModel.setValue(expenseModel.getValueTotExpenseType() - boxModel.getValueOpening());
 			
-			return ResponseEntity.status(HttpStatus.OK).body(expenseService.save(expenseModel));
+			return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.save(expenseModel));
+		}
+		/* O campo Value da tabela BoxOpening se estiver negativo (-) */
+		if (boxModel.getValue() < 0) {	
+			
+			boxModel.setValue(boxModel.getValue() * (-1) );	
+			
+			
+			boxModel.setValue(boxModel.getValue() - expenseModel.getValueTotExpenseType());
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.save(expenseModel));
+			
+				}else if(boxModel.getValue() > 0) {			
+			
+			boxModel.setValue(boxModel.getValue() - expenseModel.getValueTotExpenseType());			
+			
+			return ResponseEntity.status(HttpStatus.CREATED).body(expenseService.save(expenseModel));
 			
 		}
 		
-		return ResponseEntity.status(HttpStatus.CONFLICT).body("Not Saldo !!");		
+		return ResponseEntity.status(HttpStatus.CONFLICT).body("There is no balance!");		
 		
 	}
 	
