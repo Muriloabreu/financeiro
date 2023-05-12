@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.financeiro.models.BoxOpeningModel;
 import com.api.financeiro.models.ExpenseModel;
+import com.api.financeiro.repositories.BoxOpeningRepository;
 import com.api.financeiro.repositories.ExpenseRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +18,8 @@ public class ExpenseServiceImpl implements ExpenseService{
 	
 	@Autowired
 	ExpenseRepository expenseRepository;
+	@Autowired
+	BoxOpeningRepository boxOpeningRepository;
 
 	@Override
 	public List<ExpenseModel> findAll() {
@@ -42,6 +46,12 @@ public class ExpenseServiceImpl implements ExpenseService{
 		
 		expenseRepository.delete(expense);
 		
+	}
+
+	@Override
+	public Optional<BoxOpeningModel> findByIdBox(Long id) {
+		
+		return boxOpeningRepository.findById(id);
 	}
 
 }
