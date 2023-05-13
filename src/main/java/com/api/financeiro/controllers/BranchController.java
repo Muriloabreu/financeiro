@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.financeiro.dtos.BranchDtos;
 import com.api.financeiro.models.BranchModel;
+import com.api.financeiro.models.CompanyModel;
 import com.api.financeiro.services.BranchService;
 
 import jakarta.validation.Valid;
@@ -41,9 +42,19 @@ public class BranchController {
 			
 			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CNPJ is already in use!"); 
 		}
+		
 				
 		var branchModel = new BranchModel();
 		BeanUtils.copyProperties(branchDtos, branchModel);
+		
+		Optional<CompanyModel> companyOptional = branchService.findByIdCompany(branchModel.getCompany().getId());
+		var companyModel = companyOptional.get();
+		
+		if( branchModel.getCnpj() .equals(companyModel.getCnpj())) {
+			
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Conflict: CNPJ is already in use!");
+			
+		}
 		
 		
 		return ResponseEntity.status(HttpStatus.OK).body(branchService.save(branchModel));		
