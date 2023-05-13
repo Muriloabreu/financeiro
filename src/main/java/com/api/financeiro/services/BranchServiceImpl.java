@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.financeiro.models.BranchModel;
+import com.api.financeiro.models.CompanyModel;
 import com.api.financeiro.repositories.BranchRepository;
+import com.api.financeiro.repositories.CompanyRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +18,8 @@ public class BranchServiceImpl implements BranchService{
 	
 	@Autowired
 	BranchRepository branchRepository;
+	@Autowired
+	CompanyRepository companyRepository;
 
 	@Override
 	public List<BranchModel> findAll() {
@@ -54,6 +58,12 @@ public class BranchServiceImpl implements BranchService{
 	public boolean existsByCnpj(String cnpj) {
 		
 		return branchRepository.existsByCnpj(cnpj);
+	}
+
+	@Override
+	public Optional<CompanyModel> findByIdCompany(Long id) {
+		
+		return companyRepository.findById(id);
 	}
 
 }
